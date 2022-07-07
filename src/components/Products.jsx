@@ -1,8 +1,13 @@
 import Navbar from '../components/shared/Navbar'
 import Footer from '../components/shared/Footer'
+import axios from "axios";
+import { useState, useEffect } from "react";
+import {Link} from 'react-router-dom'
 
 
+//ฟังก์ชันการดึงข้อมูลทั้งหมด
 function Products() {
+  const [stores, setStores] = useState([]);
   return (
     <>
         <Navbar/>

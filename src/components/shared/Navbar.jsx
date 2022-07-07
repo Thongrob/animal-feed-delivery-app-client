@@ -21,12 +21,12 @@ function Navbar() {
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink className="nav-link active" aria-current="page" to='/'>
-                Home
+                รายการทั้งหมด
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/insert">
-                Insert
+                เพิ่มรายการ
               </NavLink>
             </li>
           </ul>
