@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&family=Nunito+Sans&family=Poppins&display=swap');
+
+body{
+    font-family: Poppins, 'Noto Sans Thai', sans-serif;
+}
+
+
+.navbar-light .navbar-nav .nav-link{
+    font-size: 18px;
+}
+
+section.footer{
+    background-color: #f8f9fa!important;
+}
+
+.carousel-item img{
+    width: 100%;
+}
+
+.navbar-light .navbar-toggler{
+    border: none;
+}
+
+.navbar-toggler:focus{
+    box-shadow: none;
+}
+

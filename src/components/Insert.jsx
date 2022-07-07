@@ -81,11 +81,11 @@ function Insert() {
                         </div>
                         <div className="form-group pb-2">
                             <label>เวลา</label>
-                            <input type="text" placeholder="เวลา เช่น 10.00" className="form-control" value={bookingTime} onChange={inputValue("bookingTime")}/>
+                            <input type="text" placeholder="เวลา ตัวอย่าง 10.00" className="form-control" value={bookingTime} onChange={inputValue("bookingTime")}/>
                         </div>
                         <div className="form-group pb-2">
                             <label>วันที่</label>
-                            <input type="text" placeholder="วัน/เดือน/ปี เช่น 12/05/2022" className="form-control" value={bookingDate} onChange={inputValue("bookingDate")}/>
+                            <input type="text" placeholder="วัน/เดือน/ปี ตัวอย่าง 12/05/2022" className="form-control" value={bookingDate} onChange={inputValue("bookingDate")}/>
                         </div>
                         <div className="form-group pb-2">
                             <label>ชื่อผู้สั่งซื้อ</label>
