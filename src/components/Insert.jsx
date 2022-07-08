@@ -10,16 +10,25 @@ import Swal from "sweetalert2"
 function Insert() {
     const [state, setState] = useState({
         driverName :"",
-        productName :"",
-        weight : "",
-        quantity:"",
+        timothyItem :"",
+        alphaphaItem :"",
+        rabbitItem :"",
+        goatItem :"",
+        timothyWeight: "",
+        alphaphaWeight: "",
+        rabbitWeight: "",
+        goatWeight: "",
+        timothyQuantity:"",
+        alphaphaQuantity:"",
+        rabbitQuantity:"",
+        goatQuantity:"",
         bookingTime:"",
         bookingDate:"",
         buyer:"",
         contact:"",
         author:"",
     })
-    const {driverName, productName, weight, quantity, bookingTime, bookingDate, buyer, contact, author} = state
+    const {driverName, timothyItem, alphaphaItem, rabbitItem, goatItem, timothyWeight, alphaphaWeight, rabbitWeight, goatWeight, timothyQuantity, alphaphaQuantity, rabbitQuantity, goatQuantity, bookingTime, bookingDate, buyer, contact, author} = state
 
     const inputValue = name => event => {
         // console.log(name, "=", event.target.value)
@@ -31,10 +40,10 @@ function Insert() {
         ////debug
         // console.table({driverName, productName, weight, quantity, bookingTime, bookingDate, buyer, contact, author});
         // console.log("API URL =",process.env.REACT_APP_API)
-        axios.post(`${process.env.REACT_APP_API}/insert`,{driverName, productName, weight, quantity, bookingTime, bookingDate, buyer, contact, author})
+        axios.post(`${process.env.REACT_APP_API}/insert`,{driverName, timothyItem, alphaphaItem, rabbitItem, goatItem, timothyWeight, alphaphaWeight, rabbitWeight, goatWeight, timothyQuantity, alphaphaQuantity, rabbitQuantity, goatQuantity, bookingTime, bookingDate, buyer, contact, author})
         .then(response => {
             Swal.fire('แจ้งเตือน','บันทึกข้อมูลเรียบร้อย','success')
-            setState({...state, driverName:"", productName:"", weight:"", quantity:"", bookingTime:"", bookingDate:"", buyer:"", contact:"", author:""})
+            setState({...state, driverName:"", timothyItem:"", alphaphaItem:"", rabbitItem:"", goatItem:"", timothyWeight:"", alphaphaWeight:"", rabbitWeight:"", goatWeight:"", timothyQuantity:"", alphaphaQuantity:"", rabbitQuantity:"", goatQuantity:"", bookingTime:"", bookingDate:"", buyer:"", contact:"", author:""})
         })
         .catch( err => {
             Swal.fire('แจ้งเตือน',err.response.data.error,'error')
@@ -52,33 +61,79 @@ function Insert() {
                     </div>
                     {/* {JSON.stringify(state)} */}
                     <form onSubmit={submitForm}>
-                        <div className="form-group pb-2">
-                            <label>เลือกคนขับ</label>
+                        <div className="form-group pb-4">
+                            <label>เลือกคนขับจัดส่ง</label>
                             <select className="form-select" aria-label="Default select example" value={driverName} onChange={inputValue("driverName")}>
-                                <option defaultValue>กรุณากดเลือกคนขับ</option>
+                                <option defaultValue>กรุณากดเลือกคนขับจัดส่ง</option>
                                 <option value="ฝรั่ง">ฝรั่ง</option>
                                 <option value="มะละกอ">มะละกอ</option>
                                 <option value="ส้ม">ส้ม</option>
                             </select>
                         </div>
                         <div className="form-group pb-2">
-                            <label>เลือกสินค้า</label>
-                            <select className="form-select" aria-label="Default select example" value={productName} onChange={inputValue("productName")}>
-                                <option defaultValue>กรุณากดเลือกสินค้า</option>
+                            <label>หญ้าธีโมธี</label>
+                            <select className="form-select" aria-label="Default select example" value={timothyItem} onChange={inputValue("timothyItem")}>
+                                <option defaultValue>กรุณากดเลือกสินค้าที่ต้องการ</option>
                                 <option value="หญ้าธีโมธี">หญ้าธีโมธี</option>
+                            </select>
+                        </div>
+                        <div className="form-group pb-2">
+                            <label>น้ำหนัก</label>
+                            <input type="number" placeholder="กิโลกรัม" className="form-control" value={timothyWeight} onChange={inputValue("timothyWeight")}/>
+                        </div>
+                        <div className="form-group pb-4">
+                            <label>จำนวน</label>
+                            <input type="number" placeholder="ถุง" className="form-control" value={timothyQuantity} onChange={inputValue("timothyQuantity")}/>
+                        </div>
+                        <div className="form-group pb-2">
+
+                            <label>หญ้าอัลฟาฟ่า</label>
+                            <select className="form-select" aria-label="Default select example" value={alphaphaItem} onChange={inputValue("alphaphaItem")}>
+                                <option defaultValue>กรุณากดเลือกสินค้าที่ต้องการ</option>
                                 <option value="หญ้าอัลฟาฟ่า">หญ้าอัลฟาฟ่า</option>
+                            </select>
+                        </div>
+                        <div className="form-group pb-2">
+                            <label>น้ำหนัก</label>
+                            <input type="number" placeholder="กิโลกรัม" className="form-control" value={alphaphaWeight} onChange={inputValue("alphaphaWeight")}/>
+                        </div>
+                        <div className="form-group pb-2">
+                            <label>จำนวน</label>
+                            <input type="number" placeholder="ถุง" className="form-control" value={alphaphaQuantity} onChange={inputValue("alphaphaQuantity")}/>
+                        </div>
+
+                        <div className="form-group pb-2">
+                            <label>อาหารเม็ดกระต่าย</label>
+                            <select className="form-select" aria-label="Default select example" value={rabbitItem} onChange={inputValue("rabbitItem")}>
+                                <option defaultValue>กรุณากดเลือกสินค้าที่ต้องการ</option>
                                 <option value="อาหารเม็ดกระต่าย">อาหารเม็ดกระต่าย</option>
+                            </select>
+                        </div>
+                        <div className="form-group pb-4">
+                            <label>น้ำหนัก</label>
+                            <input type="number" placeholder="กิโลกรัม" className="form-control" value={rabbitWeight} onChange={inputValue("rabbitWeight")}/>
+                        </div>
+                        <div className="form-group pb-4">
+                            <label>จำนวน</label>
+                            <input type="number" placeholder="ถุง" className="form-control" value={rabbitQuantity} onChange={inputValue("rabbitQuantity")}/>
+                        </div>
+
+                        <div className="form-group pb-2">
+                            <label>นมแพะอัดเม็ด</label>
+                            <select className="form-select" aria-label="Default select example" value={goatItem} onChange={inputValue("goatItem")}>
+                                <option defaultValue>กรุณากดเลือกสินค้าที่ต้องการ</option>
                                 <option value="นมแพะอัดเม็ด">นมแพะอัดเม็ด</option>
                             </select>
                         </div>
                         <div className="form-group pb-2">
                             <label>น้ำหนัก</label>
-                            <input type="number" placeholder="กิโลกรัม" className="form-control" value={weight} onChange={inputValue("weight")}/>
+                            <input type="number" placeholder="กิโลกรัม" className="form-control" value={goatWeight} onChange={inputValue("goatWeight")}/>
                         </div>
-                        <div className="form-group pb-2">
+                        <div className="form-group pb-4">
                             <label>จำนวน</label>
-                            <input type="number" placeholder="ถุง" className="form-control" value={quantity} onChange={inputValue("quantity")}/>
+                            <input type="number" placeholder="ถุง" className="form-control" value={goatQuantity} onChange={inputValue("goatQuantity")}/>
                         </div>
+
                         <div className="form-group pb-2">
                             <label>เวลา</label>
                             <input type="text" placeholder="เวลา ตัวอย่าง 10.00" className="form-control" value={bookingTime} onChange={inputValue("bookingTime")}/>

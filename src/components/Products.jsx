@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 function Products() {
   const [stores, setStores] = useState([]);
   const [word, setWord] = useState("")
-  const [dataFilter] = useState(["driverName","productName","bookingDate"])
+  const [dataFilter] = useState(["driverName","timothyItem","alphaphaItem,rabbitItem,goatItem","bookingDate"])
 
   const fetchData = () => {
     axios
@@ -28,9 +28,16 @@ function Products() {
 const select = (people) => {
   return stores.filter((item)=>{      
     return dataFilter.some((filter)=>{                    
-      return item[filter].indexOf(word)  > -1       
+      if(item[filter]){
+        return item[filter].indexOf(word)  > -1  
+      }
     })
   })
+}
+
+//ฟังก์ชันการใส่ comma คั่นตัวเลข
+const formatNumber = (num) => {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
   return (
@@ -41,40 +48,62 @@ const select = (people) => {
           {/* {JSON.stringify(stores)} */}
           <form onSubmit={select}>
             <div className="form-group pb-2">
-              <label>กรองข้อมูลจาก ชื่อผู้นำส่ง, วันที่จัดส่ง, สินค้าที่จัดส่ง</label>
+              <label>ค้าหาข้อมูลจาก ชื่อผู้นำส่ง, วันที่จัดส่ง, สินค้าที่จัดส่ง</label>
               <input type="text" placeholder="ตัวอย่าง ชื่อ(สมชาย),     วันที่จัดส่ง(6/11/2565),     สินค้าที่จัดส่ง(หญ้าอัลฟาฟ่า)" className="form-control" value={word} onChange={(e) => setWord(e.target.value)}/>
             </div>
-            {/* <div className="form-group pb-2">
-              <select className="form-select" aria-label="Default select example" >
-                  <option defaultValue>กรองตามวันที่จัดส่ง</option>
-                  <option value="15/08/2563">15/08/2563</option>
-                  <option value="15/08/2563">16/08/2563</option>         
-              </select>
-            </div>
-            <div className="form-group pb-2">
-              <select className="form-select" aria-label="Default select example" >
-                  <option defaultValue>กรองตามรายการสินค้า</option>
-                  <option value="หญ้าธีโมธี">หญ้าธีโมธี</option>
-                  <option value="หญ้าอัลฟาฟ่า">หญ้าอัลฟาฟ่า</option>
-                  <option value="อาหารเม็ดกระต่าย">อาหารเม็ดกระต่าย</option>
-                  <option value="นมแพะอัดเม็ด">นมแพะอัดเม็ด</option>            
-              </select>
-            </div> */}
           </form>
             {select(stores).map((product, index) => (
             <div className="row " key={index}>
               <div className="col-sm-12 pt-3 pb-2 mb-5 border rounded bg-white text-dark">
                 <p>{`หมายเลขสั่งซื้อ: ${product.orderNumber}`}</p>
                 <p>{`ชื่อผู้นำส่ง: ${product.driverName}`}</p>
-                <p>{`รายการสินค้า: ${product.productName}`}</p>
-                <p>{`น้ำหนัก: ${product.weight} Kg.`}</p>
-                <p>{`จำนวน: ${product.quantity} Unit`}</p>
+                
+                {
+                  product.timothyQuantity && (
+                    <div>
+                      <p>{`รายการ: ${product.timothyItem}`}</p>
+                      <p>{`น้ำหนัก: ${product.timothyWeight} Kg.`}</p>
+                      <p className="pb-2">{`จำนวน: ${product.timothyQuantity} Unit`}</p>
+                    </div>
+                  )
+                }
+
+                {
+                  product.alphaphaQuantity && (
+                    <div>
+                      <p>{`รายการ: ${product.alphaphaItem}`}</p>
+                      <p>{`น้ำหนัก: ${product.alphaphaWeight} Kg.`}</p>
+                      <p className="pb-2">{`จำนวน: ${product.alphaphaQuantity} Unit`}</p>
+                    </div>
+                  )
+                }
+
+                {
+                  product.rabbitQuantity && (
+                    <div>
+                      <p>{`รายการ: ${product.rabbitItem}`}</p>
+                      <p>{`น้ำหนัก: ${product.rabbitWeight} Kg.`}</p>
+                      <p className="pb-2">{`จำนวน: ${product.rabbitQuantity} Unit`}</p>
+                    </div>
+                  )
+                }
+
+                {
+                  product.goatQuantity && (
+                    <div>
+                      <p>{`รายการ: ${product.goatItem}`}</p>
+                      <p>{`น้ำหนัก: ${product.goatWeight} Kg.`}</p>
+                      <p className="pb-2">{`จำนวน: ${product.goatQuantity} Unit`}</p>
+                    </div>
+                  )
+                }
+                
                 <p>{`หมายเลขทะเบียนรถ:  ${product.car}`}</p>
                 <p>{`เวลาจัดส่ง: ${product.bookingTime}`}</p>
                 <p>{`วันที่จัดส่ง: ${product.bookingDate}`}</p>
-                <p>{`ราคาสินค้า: ${product.productPrice}`}</p>
-                <p>{`ราคาค่าส่ง: ${product.shippingPrice}`}</p>
-                <p>{`ราคารวม: ${product.totalPrice}`}</p>
+                <p>{`ราคาสินค้า: ${formatNumber(product.productPrice)}`}</p>
+                <p>{`ราคาค่าส่ง: ${formatNumber(product.shippingPrice)}`}</p>
+                <p>{`ราคารวม: ${formatNumber(product.totalPrice)}`}</p>
                 <p>{`ชื่อผู้สั่งซื้อ:  ${product.buyer}`}</p>
                 <p>{`เบอร์โทรผู้สั่งซื้อ: ${product.contact}`}</p>
                 <p>{`ผู้บันทึก: ${product.author}`}</p>             
